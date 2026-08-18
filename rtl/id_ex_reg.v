@@ -40,3 +40,43 @@ module id_ex_reg (
     output reg  [2:0]  ID_EX_ALUOp,
     output reg  [5:0]  ID_EX_Funct
 );
+
+ always @(posedge clk) begin
+        if (reset || flush) begin
+            ID_EX_IR         <= 32'b0;
+            ID_EX_NPC        <= 32'b0;
+            ID_EX_A          <= 32'b0;
+            ID_EX_B          <= 32'b0;
+            ID_EX_Imm        <= 32'b0;
+            ID_EX_WriteReg   <= 5'b0;
+            ID_EX_RegWrite   <= 1'b0;
+            ID_EX_ALUSrc     <= 1'b0;
+            ID_EX_MemRead    <= 1'b0;
+            ID_EX_MemWrite   <= 1'b0;
+            ID_EX_MemtoReg   <= 1'b0;
+            ID_EX_Branch     <= 1'b0;
+            ID_EX_BranchType <= 1'b0;
+            ID_EX_Link       <= 1'b0;
+            ID_EX_ALUOp      <= 3'b0;
+            ID_EX_Funct      <= 6'b0;
+        end 
+        else begin
+            ID_EX_IR         <= id_ir;
+            ID_EX_NPC        <= id_npc;
+            ID_EX_A          <= id_a;
+            ID_EX_B          <= id_b;
+            ID_EX_Imm        <= id_imm;
+            ID_EX_WriteReg   <= id_write_reg;
+            ID_EX_RegWrite   <= id_reg_write;
+            ID_EX_ALUSrc     <= id_alu_src;
+            ID_EX_MemRead    <= id_mem_read;
+            ID_EX_MemWrite   <= id_mem_write;
+            ID_EX_MemtoReg   <= id_mem_to_reg;
+            ID_EX_Branch     <= id_branch;
+            ID_EX_BranchType <= id_branch_type;
+            ID_EX_Link       <= id_link;
+            ID_EX_ALUOp      <= id_alu_op;
+            ID_EX_Funct      <= id_funct;
+        end
+    end
+endmodule
